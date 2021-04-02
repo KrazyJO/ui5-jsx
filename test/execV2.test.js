@@ -81,8 +81,10 @@ RenderManager.prototype.writeStyles = function () {
     }
 }
 
-RenderManager.prototype.openStart = function(tag, oControl) {
-    this.buffer += '<' + tag;
+RenderManager.prototype.openStart 
+    = RenderManager.prototype.voidStart 
+    = function(tag, oControl) {
+        this.buffer += '<' + tag;
 }
 
 RenderManager.prototype.openEnd = function() {
@@ -90,6 +92,13 @@ RenderManager.prototype.openEnd = function() {
     this.writeStyles();
     this.buffer += ">";
 }
+
+RenderManager.prototype.voidEnd = function() {
+    this.writeClasses();
+    this.writeStyles();
+    this.buffer += " />";
+}
+
 
 RenderManager.prototype.close = function(tag) {
     this.buffer += "</" + tag + ">";

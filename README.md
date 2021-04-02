@@ -5,8 +5,6 @@ The original version does not support the new RenderManager API. This project ex
 
 The original behaviour is kept. The new syntax is activated with ```oRm.renderV2(...)``` instead of ```oRm.render(...)```.
 
-At this moment, void elements are not implemented.
-
 JSX:
 ```javascript
 oRm.renderV2(

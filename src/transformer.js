@@ -154,6 +154,12 @@ module.exports = function (nd, renderer, error) {
         }
     }
 
+    function transformVoidElement(node, tag, controlData) {
+        renderer.renderOpenStart(tag, controlData, true)
+        transformAttributes(node.openingElement.attributes || []);
+        renderer.renderOpenEnd(tag, true);
+    }
+
     function transformElement(node) {
         let tag = getElementTag(node);
         if (tag.startsWith("ui5")) {
@@ -166,17 +172,46 @@ module.exports = function (nd, renderer, error) {
             }
 
             const controlData = transformUI5ControlData(node);
-            renderer.renderOpenStart(tag, controlData)
+            if (isVoidElement(tag)) {
+                transformVoidElement(node, tag, controlData);
+                return;
+            }
+
+            renderer.renderOpenStart(tag, controlData, false)
             transformAttributes(node.openingElement.attributes || []);
+            renderer.renderOpenEnd(tag, false);
             if (node.openingElement.selfClosing) {
                 renderer.renderClose(tag);
-            } else {
-                renderer.renderOpenEnd(tag);
-            }
+            } 
+
             (node.children || []).forEach(transformChild);
+            
             if (node.closingElement && !node.selfClosing) {
                 renderer.renderClose(tag);
             }
+        }
+    }
+
+    function isVoidElement(tag) {
+        // area, base, br, col, embed, hr, img, input, link, meta, param, source, track, wbr
+        switch (tag) {
+            case "area":
+            case "base":
+            case "br":
+            case "col":
+            case "embed":
+            case "hr":
+            case "img":
+            case "input":
+            case "link":
+            case "meta":
+            case "param":
+            case "source":
+            case "track":
+            case "wbr":
+                return true;
+            default:
+                return false;
         }
     }
 

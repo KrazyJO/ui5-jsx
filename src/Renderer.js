@@ -102,17 +102,17 @@ Renderer.prototype.toFunctionCall = function() {
     return t.callExpression(t.parenthesizedExpression(arrow), []);
 };
 
-Renderer.prototype.renderOpenStart = function(expression, controlData) {
+Renderer.prototype.renderOpenStart = function(expression, controlData, bVoid) {
     const args = [];
     args.push(t.stringLiteral(expression));
     if (controlData) {
         args.push(t.identifier(controlData));
     }
-    this.call("openStart", args);
+    this.call(bVoid ? "voidStart" : "openStart", args);
 };
 
-Renderer.prototype.renderOpenEnd = function(expression) {
-    this.call("openEnd", []);
+Renderer.prototype.renderOpenEnd = function(expression, bVoid) {
+    this.call(bVoid ? "voidEnd" : "openEnd", []);
 }
 
 Renderer.prototype.renderClose = function(expression) {
