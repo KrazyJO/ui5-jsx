@@ -1,0 +1,19 @@
+/* global oRm */
+oRm.renderV2(
+    <div>
+        <input></input>
+        <area></area>
+        <base></base>
+        <br></br>
+        <col></col>
+        <embed></embed>
+        <hr></hr>
+        <img></img>
+        <link></link>
+        <meta></meta>
+        <param></param>
+        <source></source>
+        <track></track>
+        <wbr></wbr>
+    </div>
+);
