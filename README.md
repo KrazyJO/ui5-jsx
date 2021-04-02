@@ -1,3 +1,32 @@
+# ui5-jsx
+This is a forked project form [ui5-jsx-rm](https://github.com/serban-petrescu/ui5-jsx-rm). 
+
+The original version does not support the new RenderManager API. This project extends the original one to add the new features.
+
+The original behaviour is kept. The new syntax is activated with ```oRm.renderV2(...)``` instead of ```oRm.render(...)```.
+
+At this moment, void elements are not implemented.
+
+JSX:
+```javascript
+oRm.renderV2(
+    <button id="myButton" type="button">Click me!</button>
+);
+```
+
+(New) Output:
+```javascript
+(function () {
+    oRm.openStart("button");
+    oRm.attr("id", "myButton");
+    oRm.attr("type", "button");
+    oRm.openEnd();
+    oRm.text("Click me!");
+    oRm.close("button");
+})();
+```
+
+
 # JSX to UI5 Render Manager [![Build Status](https://travis-ci.org/serban-petrescu/ui5-jsx-rm.svg?branch=master)](https://travis-ci.org/serban-petrescu/ui5-jsx-rm) [![Coverage Status](https://coveralls.io/repos/github/serban-petrescu/ui5-jsx-rm/badge.svg?branch=master)](https://coveralls.io/github/serban-petrescu/ui5-jsx-rm?branch=master) [![License](https://img.shields.io/github/license/serban-petrescu/ui5-jsx-rm.svg)](https://github.com/serban-petrescu/ui5-jsx-rm/blob/master/LICENSE)
 Babel plugin for converting JSX to UI5 render manager calls.
 

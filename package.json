@@ -1,19 +1,19 @@
 {
-  "name": "spet-ui5-jsx-rm",
-  "version": "0.0.1",
+  "name": "ui5-jsx",
+  "version": "0.1.0",
   "description": "Babel plugin for converting JSX to UI5 render manager calls.",
   "main": "src/index.js",
-  "author": "Serban Petrescu",
+  "author": "Jörn Otte",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/serban-petrescu/ui5-jsx-rm.git"
+    "url": "https://github.com/KrazyJO/ui5-jsx.git"
   },
   "bugs": {
-    "url": "https://github.com/serban-petrescu/ui5-jsx-rm/issues"
+    "url": "https://github.com/KrazyJO/ui5-jsx/issues"
   },
   "license": "Apache-2.0",
   "scripts": {
