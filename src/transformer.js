@@ -21,7 +21,9 @@ module.exports = function (nd, renderer, error) {
             let value = attribute.value.expression;
             switch (name) {
                 case "ui5ControlData":
-                    renderer.renderControlData(value);
+                    if (renderer.isLegacy()) {
+                        renderer.renderControlData(value);
+                    }
                     break;
                 case "ui5ElementData":
                     renderer.renderElementData(value);
@@ -133,18 +135,47 @@ module.exports = function (nd, renderer, error) {
         }
     }
 
+    function transformUI5ControlData(node) {
+        for (const attr of node.openingElement.attributes) {
+            if (attr.name && attr.name.name === "ui5ControlData") {
+                return attr.value.expression.name;
+            }
+        }
+    }
+
+    function legacyTranformElement(node, tag) {
+        renderer.renderPlain("<" + tag + " ");
+        transformAttributes(node.openingElement.attributes || []);
+        renderer.renderClasses();
+        renderer.renderPlain(node.selfClosing ? "/>" : ">");
+        (node.children || []).forEach(transformChild);
+        if (node.closingElement && !node.selfClosing) {
+            renderer.renderPlain("</" + tag + ">");
+        }
+    }
+
     function transformElement(node) {
         let tag = getElementTag(node);
         if (tag.startsWith("ui5")) {
             transformSpecialElement(tag, node);
         } else {
-            renderer.renderPlain("<" + tag + " ");
+            
+            if (renderer.isLegacy()) {
+                legacyTranformElement(node, tag);
+                return;
+            }
+
+            const controlData = transformUI5ControlData(node);
+            renderer.renderOpenStart(tag, controlData)
             transformAttributes(node.openingElement.attributes || []);
-            renderer.renderClasses();
-            renderer.renderPlain(node.selfClosing ? "/>" : ">");
+            if (node.openingElement.selfClosing) {
+                renderer.renderClose(tag);
+            } else {
+                renderer.renderOpenEnd(tag);
+            }
             (node.children || []).forEach(transformChild);
             if (node.closingElement && !node.selfClosing) {
-                renderer.renderPlain("</" + tag + ">");
+                renderer.renderClose(tag);
             }
         }
     }
