@@ -18,57 +18,60 @@ sap.ui.define([
             }
         },
 
-        renderer: function(oRm, oC) {
-            oRm.render(
-                <section ui5ControlData={ oC }
-                    class={{
-                        "hero": true,
-                        "is-primary": oC.getColor() === library.Color.Primary,
-                        "is-info": oC.getColor() === library.Color.Info,
-                        "is-success": oC.getColor() === library.Color.Success,
-                        "is-warning": oC.getColor() === library.Color.Warning,
-                        "is-danger": oC.getColor() === library.Color.Danger,
-                        "is-light": oC.getColor() === library.Color.Light,
-                        "is-dark": oC.getColor() === library.Color.Dark,
-                        "is-medium": oC.getSize() === library.HeroSize.Medium,
-                        "is-large": oC.getSize() === library.HeroSize.Large,
-                        "is-fullheight": oC.getSize() === library.HeroSize.FullHeight,
-                    }}>
-                    <div class="hero-head">
-                        <header class="nav">
-                        <div class="container">
-                            <div class="nav-right nav-menu">
-                            {
-                                (oC.getHeaderNavItems() || []).forEach(i => (
-                                    <a class="nav-item is-active">{ i.getText() }</a>
-                                ))
-                            }
+        renderer: {
+            apiVersion: 2,
+            render: function(oRm, oC) {
+                oRm.renderV2(
+                    <section ui5ControlData={ oC }
+                        class={{
+                            "hero": true,
+                            "is-primary": oC.getColor() === library.Color.Primary,
+                            "is-info": oC.getColor() === library.Color.Info,
+                            "is-success": oC.getColor() === library.Color.Success,
+                            "is-warning": oC.getColor() === library.Color.Warning,
+                            "is-danger": oC.getColor() === library.Color.Danger,
+                            "is-light": oC.getColor() === library.Color.Light,
+                            "is-dark": oC.getColor() === library.Color.Dark,
+                            "is-medium": oC.getSize() === library.HeroSize.Medium,
+                            "is-large": oC.getSize() === library.HeroSize.Large,
+                            "is-fullheight": oC.getSize() === library.HeroSize.FullHeight,
+                        }}>
+                        <div class="hero-head">
+                            <header class="nav">
+                            <div class="container">
+                                <div class="nav-right nav-menu">
+                                {
+                                    (oC.getHeaderNavItems() || []).forEach(i => (
+                                        <a class="nav-item is-active">{ i.getText() }</a>
+                                    ))
+                                }
+                                </div>
+                            </div>
+                            </header>
+                        </div>
+
+                        <div class="hero-body">
+                            <div class="container has-text-centered">
+                                <h1 class="title">{ oC.getTitle() }</h1>
+                                <h2 class="subtitle">{ oC.getSubtitle() }</h2>
                             </div>
                         </div>
-                        </header>
-                    </div>
-
-                    <div class="hero-body">
-                        <div class="container has-text-centered">
-                            <h1 class="title">{ oC.getTitle() }</h1>
-                            <h2 class="subtitle">{ oC.getSubtitle() }</h2>
+                        <div class="hero-foot">
+                            <nav class="tabs">
+                            <div class="container">
+                                <ul>
+                                {
+                                    (oC.getFooterNavItems() || []).forEach(i => (
+                                        <li><a>{ i.getText() }</a></li>
+                                    ))
+                                }
+                                </ul>
+                            </div>
+                            </nav>
                         </div>
-                    </div>
-                    <div class="hero-foot">
-                        <nav class="tabs">
-                        <div class="container">
-                            <ul>
-                            {
-                                (oC.getFooterNavItems() || []).forEach(i => (
-                                    <li><a>{ i.getText() }</a></li>
-                                ))
-                            }
-                            </ul>
-                        </div>
-                        </nav>
-                    </div>
-                </section>
-            );
+                    </section>
+                );
+            }
         }
 
     });

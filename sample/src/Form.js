@@ -11,16 +11,19 @@ sap.ui.define([
             defaultAggregation: "elements"
         },
 
-        renderer: function(oRm, oC) {
-            oRm.render(
-                <div ui5ControlData={ oC } class={ {container: true, "is-fluid": true} }>
-                {
-                    (oC.getElements() || []).forEach(e => (
-                        <ui5Control>{ e }</ui5Control>
-                    ))
-                }
-                </div>
-            );
+        renderer: {
+            apiVersion: 2,
+            render: function(oRm, oC) {
+                oRm.renderV2(
+                    <div ui5ControlData={ oC } class={ {container: true, "is-fluid": true} }>
+                    {
+                        (oC.getElements() || []).forEach(e => (
+                            <ui5Control>{ e }</ui5Control>
+                        ))
+                    }
+                    </div>
+                );
+            }
         }
     });
 });

@@ -14,17 +14,20 @@ sap.ui.define([
             defaultAggregation: "field"
         },
 
-        renderer: function(oRm, oC) {
-            oRm.render(
-                <div ui5ControlData={ oC } class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label">{ oC.getLabel() }</label>
+        renderer: {
+            apiVersion: 2,
+            render: function(oRm, oC) {
+                oRm.renderV2(
+                    <div ui5ControlData={ oC } class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">{ oC.getLabel() }</label>
+                        </div>
+                        <div class="field-body">
+                            <ui5Control>{ oC.getField() }</ui5Control>
+                        </div>
                     </div>
-                    <div class="field-body">
-                        <ui5Control>{ oC.getField() }</ui5Control>
-                    </div>
-                </div>
-            );
+                );
+            }
         }
     });
 });

@@ -20,29 +20,32 @@ sap.ui.define([
             }.bind(this))
         },
 
-        renderer: function(oRm, oC) {
-            function isSelected(val) {
-                return (oC.getSelectedKey() === val ? {selected: "selected"} : {});
+        renderer: {
+            apiVersion: 2,
+            render: function(oRm, oC) {
+                function isSelected(val) {
+                    return (oC.getSelectedKey() === val ? {selected: "selected"} : {});
+                }
+    
+                oRm.renderV2(
+                    <div ui5ControlData={ oC } class="field">
+                        <p class="control">
+                            <span class="select select2">
+                            <select id={ oC.getId() + "-select" }>
+                                <option value="" { ...isSelected("") }></option>
+                                {
+                                    (oC.getItems() || []).forEach(i => (
+                                        <option value={ i.getKey() } { ...isSelected(i.getKey()) }>
+                                            { i.getText() }
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                            </span>
+                        </p>
+                    </div>
+                );
             }
-
-            oRm.render(
-                <div ui5ControlData={ oC } class="field">
-                    <p class="control">
-                        <span class="select">
-                        <select id={ oC.getId() + "-select" }>
-                            <option value="" { ...isSelected("") }></option>
-                            {
-                                (oC.getItems() || []).forEach(i => (
-                                    <option value={ i.getKey() } { ...isSelected(i.getKey()) }>
-                                        { i.getText() }
-                                    </option>
-                                ))
-                            }
-                        </select>
-                        </span>
-                    </p>
-                </div>
-            );
         }
     });
 });
