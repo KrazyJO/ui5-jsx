@@ -25,18 +25,18 @@ oRm.renderV2(
 ```
 
 
-# JSX to UI5 Render Manager [![Build Status](https://travis-ci.org/serban-petrescu/ui5-jsx-rm.svg?branch=master)](https://travis-ci.org/serban-petrescu/ui5-jsx-rm) [![Coverage Status](https://coveralls.io/repos/github/serban-petrescu/ui5-jsx-rm/badge.svg?branch=master)](https://coveralls.io/github/serban-petrescu/ui5-jsx-rm?branch=master) [![License](https://img.shields.io/github/license/serban-petrescu/ui5-jsx-rm.svg)](https://github.com/serban-petrescu/ui5-jsx-rm/blob/master/LICENSE)
+# JSX to UI5 Render Manager
 Babel plugin for converting JSX to UI5 render manager calls.
 
 ## Usage
-You can install the plugin through npm: `npm install spet-ui5-jsx-rm --save-dev` and then use it as any other [babel plugin](https://babeljs.io/docs/plugins/). It should be used together with a [babel preset](https://babeljs.io/docs/plugins/#presets-official-presets) that can support arrow functions (as the transpilation produces arrow functions).
+You can install the plugin through npm: `npm install ui5-jsx --save-dev` and then use it as any other [babel plugin](https://babeljs.io/docs/plugins/). It should be used together with a [babel preset](https://babeljs.io/docs/plugins/#presets-official-presets) that can support arrow functions (as the transpilation produces arrow functions).
 
 ### Example
 Assuming that you have a `webapp` folder with our js files and you want to transpile them into the `dist` folder, you should first make a `.babelrc` file with the following content:
 ```javascript
 {
     "presets": ["env"],
-    "plugins": ["spet-ui5-jsx-rm"]
+    "plugins": ["ui5-jsx"]
 }
 ```
 Then you can run the following command in your terminal of choice: `babel webapp --out-dir dist`.
